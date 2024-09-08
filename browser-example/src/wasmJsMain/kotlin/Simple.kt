@@ -5,4 +5,4 @@ fun main() {
     document.body?.appendText("Hello, ${greet()}!")
 }
 
-fun greet() = "world"
+fun greet() = "worlddddd"

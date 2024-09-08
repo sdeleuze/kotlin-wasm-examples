@@ -1,32 +1,22 @@
-import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
+@file:OptIn(ExperimentalWasmDsl::class)
+
+import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
 
 plugins {
-    kotlin("multiplatform") version "1.8.20-Beta"
+    kotlin("multiplatform") version "2.0.20"
 }
 
 group = "me.user"
 version = "1.0-SNAPSHOT"
 
 repositories {
-    maven("https://maven.pkg.jetbrains.space/kotlin/p/kotlin/dev")
     mavenCentral()
 }
 
 kotlin {
-    wasm {
-        binaries.executable()
+    wasmJs {
         browser {
-            commonWebpackConfig {
-                // Kotlin Gradle Plugin 1.8.20 and newer are doing it for you
-//                devServer = (devServer ?: KotlinWebpackConfig.DevServer()).copy(
-//                    open = mapOf(
-//                        "app" to mapOf(
-//                            "name" to "google chrome canary", // "edge"
-//                            "arguments" to listOf("--js-flags=--experimental-wasm-gc")
-//                        )
-//                    ),
-//                )
-            }
+            binaries.executable()
         }
     }
     sourceSets {
@@ -36,7 +26,7 @@ kotlin {
                 implementation(kotlin("test"))
             }
         }
-        val wasmMain by getting
-        val wasmTest by getting
+        val wasmJsMain by getting
+        val wasmJsTest by getting
     }
 }
